@@ -7,7 +7,7 @@ from data_access.subject_repo import (
 )
 from data_access.session_repo import  (
     get_all_sessions, get_session_by_id,
-    save_new_session, update_session, delete_session
+    save_new_session, update_session, delete_session, get_sessions_by_date
 )
 
 def print_menu():
@@ -127,21 +127,21 @@ def main():
             delete_session(session)
             print("Session deleted!")
             
-        elif choice == "10":  # Search sessions by date
-    search_date = input("Enter the session date to search (YYYY-MM-DD): ").strip()
+        elif choice == "10":  
+            search_date = input("Enter the session date to search (YYYY-MM-DD): ").strip()
 
-    try:
-        sessions = get_sessions_by_date(search_date)
-    except ValueError as ve:
-        print(ve)
-        continue  # skip back to menu if date is invalid
+            try:
+                sessions = get_sessions_by_date(search_date)
+            except ValueError as ve:
+                print(ve)
+                continue  # skip back to menu if date is invalid
 
-    if not sessions:
-        print("No sessions found on that date.")
-    else:
-        print(f"Found {len(sessions)} session(s) on {search_date}:")
-        for s in sessions:
-            print(f"ID: {s.id} | Date: {s.date} | Duration: {s.duration} | Subject ID: {s.subject_id}")
+            if not sessions:
+                print("No sessions found on that date.")
+            else:
+                print(f"Found {len(sessions)} session(s) on {search_date}:")
+                for s in sessions:
+                    print(f"ID: {s.id} | Date: {s.date} | Duration: {s.duration} | Subject ID: {s.subject_id}")
 
 
         elif choice == "11":
