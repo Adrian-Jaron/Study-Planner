@@ -2,20 +2,20 @@ from environs import Env
 import sqlite3
 from datetime import date, datetime
 from model.subject import Subject
-from db.connection import get_connection
+from data_access.connection import get_connection
 
 env = Env()
 env.read_env()
 DATABASE_NAME = env.str("DATABASE")
 
 def convert_subject_row(row: tuple) -> Subject:
-     return Subject(
-         id=row[0],
-         name=row[1],
-         lector=row[2],
-         study_points=row[3]
-         )
- 
+    return Subject(
+        id=row[0],
+        name=row[1],
+        lector=row[2],
+        study_points=row[3]
+    )
+
 def get_all_subjects() -> list[Subject]:
     with get_connection() as connection:
         cursor = connection.cursor()
@@ -23,17 +23,17 @@ def get_all_subjects() -> list[Subject]:
         rows = cursor.fetchall()
         return [convert_subject_row(row) for row in rows]
 
-def get_subject_by_name(name: str) -> Subject | None:
+
+def get_subject_by_id(subject_id: int) -> Subject | None:
     with get_connection() as connection:
         cursor = connection.cursor()
         cursor.execute(
-            """
-            SELECT * 
-            from subjects 
-            where subject_name = ?
-            """,
-            (name,)
-            )
+            "SELECT * FROM subjects WHERE subject_id = ?",
+            (subject_id,)
+        )
+        row = cursor.fetchone()
+        return convert_subject_row(row) if row else None
+    
     
 def save_new_subject(subject: Subject) -> None:
     with get_connection() as connection:
