@@ -17,18 +17,25 @@ def generate_csv(filename: str):
             writer.writerow([s.id, s.date, s.duration, subj_name])
 
 def generate_excel(filename: str):
+    if not filename.lower().endswith(".xlsx"):
+        filename += ".xlsx"
+
     subjects = get_all_subjects()
     sessions = get_all_sessions()
-    
-    data = []
-    for s in sessions:
-        subj_name = next((sub.name for sub in subjects if sub.id == s.subject_id), "")
-        data.append({
+
+    subject_map = {sub.id: sub.name for sub in subjects}
+
+    data = [
+        {
             "Session ID": s.id,
             "Date": s.date,
             "Duration": s.duration,
-            "Subject Name": subj_name
-        })
-    
+            "Subject Name": subject_map.get(s.subject_id, "")
+        }
+        for s in sessions
+    ]
+
     df = pd.DataFrame(data)
-    df.to_excel(filename, index=False)  
+
+    with pd.ExcelWriter(filename, engine="xlsxwriter") as writer:
+        df.to_excel(writer, index=False, sheet_name="Sessions")

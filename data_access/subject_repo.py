@@ -69,15 +69,16 @@ def update_subject(subject: Subject) -> None:
         cursor.execute(
             """
             UPDATE subjects
-                subject_name = ?,
+            set subject_name = ?,
                 subject_lector = ?,
-                subject_study_points = ?,
+                subject_study_points = ?
             Where subject_id = ?
             """,
             (
                 subject.name,
                 subject.lector,
                 subject.study_points,
+                subject.id
                 ),
             )
         connection.commit()
