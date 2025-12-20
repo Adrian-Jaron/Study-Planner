@@ -11,7 +11,7 @@ from data_access.session_repo import  (
 )
 
 def print_menu():
-    print("\n=== Study Tracker Menu ===")
+    print("\n=== Study Planner Menu ===")
     print("1. View all subjects")
     print("2. Add new subject")
     print("3. Update subject")
@@ -25,7 +25,7 @@ def print_menu():
     print("0. Exit")
 
 def main():
-    print("Welcome to Study Tracker!")
+    print("Welcome to Study Planner!")
     while True:
         print_menu()
         choice = input("Choose one of the menu options: ").strip()
