@@ -17,7 +17,7 @@ def print_menu():
     print("2. Add new subject")
     print("3. Update subject")
     print("4. Delete subject")
-    print("5.")
+    print("5. Search subject on name")
     print("=== Sessions ===")
     print("5. View all sessions")
     print("6. Add new session")
@@ -37,7 +37,7 @@ def main():
         if choice == "1":
             subjects = get_all_subjects()
             for s in subjects:
-                print(f"{s.id}: {s.name}, Lector: {s.lector}, Points: {s.study_points}")
+                print(f"subject: {s.id}: {s.name}, Lector: {s.lector}, Points: {s.study_points}")
 
         elif choice == "2":
             name = input("Subject name: ").strip()
@@ -45,7 +45,7 @@ def main():
             points = int(input("Amount of study points: ").strip())
             subject = Subject(0, name, lector, points)
             save_new_subject(subject)
-            print("Subject added!")
+            print("New Subject added!")
 
         elif choice == "3":
             id_ = int(input("Enter subject ID to update: ").strip())
