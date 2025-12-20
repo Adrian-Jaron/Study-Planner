@@ -2,7 +2,8 @@ from environs import Env
 import sqlite3
 from datetime import date, datetime
 from model.session import Session
-from db.connection import get_connection
+from data_access.connection import get_connection
+
 
 env = Env()
 env.read_env()
