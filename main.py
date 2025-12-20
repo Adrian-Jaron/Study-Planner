@@ -12,14 +12,17 @@ from data_access.session_repo import  (
 
 def print_menu():
     print("\n=== Study Planner Menu ===")
+    print("=== Subjects ===")
     print("1. View all subjects")
     print("2. Add new subject")
     print("3. Update subject")
     print("4. Delete subject")
+    print("=== Sessions ===")
     print("5. View all sessions")
     print("6. Add new session")
     print("7. Update session")
     print("8. Delete session")
+    print("=== Generate ===")
     print("9. Generate CSV report")
     print("10. Generate Excel report")
     print("0. Exit")
