@@ -17,6 +17,7 @@ def print_menu():
     print("2. Add new subject")
     print("3. Update subject")
     print("4. Delete subject")
+    print("5.")
     print("=== Sessions ===")
     print("5. View all sessions")
     print("6. Add new session")
@@ -70,13 +71,27 @@ def main():
                 continue
             delete_subject(subject)
             print("Subject deleted!")
-
+            
+            
         elif choice == "5":
+            search_name = input("Enter the name (or part of the name) of the subject to search: ").strip().lower()
+            subjects = get_all_subjects()
+            matched_subjects = [sub for sub in subjects if search_name in sub.name.lower()]
+        
+            if not matched_subjects:
+                print("No subjects found with that name.")
+            else:
+                print(f"Found {len(matched_subjects)} subject(s):")
+                for sub in matched_subjects:
+                    print(f"ID: {sub.id} | Name: {sub.name}")
+
+        elif choice == "6":
             sessions = get_all_sessions()
             for s in sessions:
                 print(f"{s.id}: Date: {s.date}, Duration: {s.duration}, Subject ID: {s.subject_id}")
 
-        elif choice == "6":
+
+        elif choice == "7":
             date = input("Session date (YYYY-MM-DD): ").strip()
             duration = int(input("Session duration (minutes): ").strip())
             subject_id = int(input("Subject ID: ").strip())
@@ -84,7 +99,7 @@ def main():
             save_new_session(session)
             print("Session added!")
 
-        elif choice == "7":
+        elif choice == "8":
             id_ = int(input("Enter session ID to update: ").strip())
             session = get_session_by_id(id_)
             if not session:
@@ -102,7 +117,7 @@ def main():
             update_session(session)
             print("Session updated!")
 
-        elif choice == "8":
+        elif choice == "9":
             id_ = int(input("Enter session ID to delete: ").strip())
             session = get_session_by_id(id_)
             if not session:
@@ -111,12 +126,12 @@ def main():
             delete_session(session)
             print("Session deleted!")
 
-        elif choice == "9":
+        elif choice == "10":
             filename = input("Enter CSV filename: ").strip()
             generate_csv(filename)
             print(f"CSV report created: {filename}")
 
-        elif choice == "10":
+        elif choice == "11":
             filename = input("Enter Excel filename: ").strip()
             generate_excel(filename)
             print(f"Excel report generated: {filename}")
