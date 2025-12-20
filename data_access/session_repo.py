@@ -84,3 +84,21 @@ def update_session(session: Session) -> None:
                 ),
             )
         connection.commit()
+        
+
+def get_sessions_by_date(search_date: str) -> list[Session]:
+
+    
+    try:
+        datetime.strptime(search_date, "%Y-%m-%d")
+    except ValueError:
+        raise ValueError("Date must be in YYYY-MM-DD format")
+
+    with get_connection() as connection:
+        cursor = connection.cursor()
+        cursor.execute(
+            "SELECT * FROM sessions WHERE session_date = ? ORDER BY session_id DESC",
+            (search_date,)
+        )
+        rows = cursor.fetchall()
+        return [convert_session_row(row) for row in rows]
