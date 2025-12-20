@@ -1,7 +1,7 @@
 import pandas as pd
 import csv
-from db.subject_dao import get_all_subjects
-from db.session_dao import get_all_sessions
+from data_access.subject_repo import get_all_subjects
+from data_access.session_repo import get_all_sessions
 
 def generate_csv(filename: str):
     subjects = get_all_subjects()
@@ -31,4 +31,4 @@ def generate_excel(filename: str):
         })
     
     df = pd.DataFrame(data)
-    df.to_excel(filename, index=False)  # pandas handles Excel writing internally
+    df.to_excel(filename, index=False)  
