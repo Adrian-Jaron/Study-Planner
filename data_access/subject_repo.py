@@ -69,7 +69,6 @@ def update_subject(subject: Subject) -> None:
         cursor.execute(
             """
             UPDATE subjects
-            set subject_id = ?,
                 subject_name = ?,
                 subject_lector = ?,
                 subject_study_points = ?,
