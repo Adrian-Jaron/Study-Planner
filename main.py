@@ -1,11 +1,11 @@
 from service.report import generate_csv, generate_excel
 from model.subject import Subject
 from model.session import Session
-from db.subject_dao import (
+from data_access.subject_repo import (
     get_all_subjects, get_subject_by_id,
     save_new_subject, update_subject, delete_subject
 )
-from db.session_dao import (
+from data_access.session_repo import  (
     get_all_sessions, get_session_by_id,
     save_new_session, update_session, delete_session
 )
