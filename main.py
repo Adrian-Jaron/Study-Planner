@@ -23,9 +23,10 @@ def print_menu():
     print("7. Add new session")
     print("8. Update session")
     print("9. Delete session")
+    print("10. Search session per date")
     print("=== Generate ===")
-    print("10. Generate CSV report")
-    print("11. Generate Excel report")
+    print("11. Generate CSV report")
+    print("12. Generate Excel report")
     print("0. Exit")
 
 def main():
@@ -125,13 +126,30 @@ def main():
                 continue
             delete_session(session)
             print("Session deleted!")
+            
+        elif choice == "10":  # Search sessions by date
+    search_date = input("Enter the session date to search (YYYY-MM-DD): ").strip()
 
-        elif choice == "10":
+    try:
+        sessions = get_sessions_by_date(search_date)
+    except ValueError as ve:
+        print(ve)
+        continue  # skip back to menu if date is invalid
+
+    if not sessions:
+        print("No sessions found on that date.")
+    else:
+        print(f"Found {len(sessions)} session(s) on {search_date}:")
+        for s in sessions:
+            print(f"ID: {s.id} | Date: {s.date} | Duration: {s.duration} | Subject ID: {s.subject_id}")
+
+
+        elif choice == "11":
             filename = input("Enter CSV filename: ").strip()
             generate_csv(filename)
             print(f"CSV report created: {filename}")
 
-        elif choice == "11":
+        elif choice == "12":
             filename = input("Enter Excel filename: ").strip()
             generate_excel(filename)
             print(f"Excel report generated: {filename}")
