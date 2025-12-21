@@ -47,9 +47,15 @@ Search sessions per date
 
 create a file .env in the main folder.
 You have to type in the .env file the following:
-DATABASE=name_of_database
+DATABASE=DATABASE=data/your_database.db
 
-replace name_of_database with your own db name.
+
+replace your_database with your own db name.
+
+Make sure the database file exists. By default, it should be located at data/database.db. If it doesn’t exist, create it manually using SQLite:
+
+mkdir -p data
+sqlite3 data/database.db
 
 ## How to run
 
