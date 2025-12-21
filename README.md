@@ -43,3 +43,48 @@ Search subjects per name
 
 Search sessions per date
 
+## Database name
+
+create a file .env in the main folder.
+You have to type in the .env file the following:
+DATABASE=name_of_database
+
+replace name_of_database with your own db name.
+
+## How to run
+
+1. Clone repository or download my zip
+
+2. Create Virtual env
+python -m venv .venv
+
+3. Install every required library
+pip install -r requirements.txt
+
+4. Execute the code
+python -m main
+
+## Structure of db
+
+I have 2 tables sessions and subjects.
+
+#### Subjects
+
+    CREATE TABLE IF NOT EXISTS subjects (
+        subject_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        subject_name TEXT NOT NULL,
+        subject_lector TEXT NOT NULL,
+        subject_study_points INTEGER
+    );
+   
+
+#### Sessions
+   
+    CREATE TABLE IF NOT EXISTS sessions (
+        session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        session_date TEXT NOT NULL,
+        session_duration INTEGER NOT NULL,
+        subject_id INTEGER NOT NULL,
+        FOREIGN KEY(subject_id) REFERENCES subjects(subject_id)
+    );
+ 
