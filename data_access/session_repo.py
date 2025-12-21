@@ -50,7 +50,7 @@ def save_new_session(session: Session) -> None:
                 (session.date, session.duration, session.subject_id),
             )
             session.id = cursor.lastrowid
-        connection.commit()
+            connection.commit()
 
 def delete_session(session: Session) -> None:
     with get_connection() as connection:
