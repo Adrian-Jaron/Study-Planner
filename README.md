@@ -47,7 +47,7 @@ Search sessions per date
 
 create a file .env in the main folder.
 You have to type in the .env file the following:
-DATABASE=DATABASE=data/your_database.db
+DATABASE=data/your_database.db
 
 
 replace your_database with your own db name.
